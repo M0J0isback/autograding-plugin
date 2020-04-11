@@ -20,7 +20,7 @@ pipeline {
 			<error line="37" column="9" severity="error" message="&apos;}&apos; sollte in derselben Zeile stehen." source="com.puppycrawl.tools.checkstyle.checks.blocks.RightCurlyCheck"/>
 			</file>
 			</checkstyle>
-			''', fileName: 'checkstyle-result.xml'),
+			''', fileName: 'pipeline_self/checkstyle-result.xml'),
                                 fileCreateOperation(fileContent: '''<?xml version="1.0" encoding="UTF-8"?>
 		<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-failsafe-plugin/xsd/failsafe-test-report-3.0.xsd" version="3.0" name="io.jenkins.plugins.grading.AutoGraderITest" time="20.798" tests="3" errors="0" skipped="0" failures="0">
 		<properties>
@@ -94,7 +94,7 @@ pipeline {
   <testcase name="shouldCountCheckStyleWarnings" classname="io.jenkins.plugins.grading.AutoGraderITest" time="3.087"/>
   <testcase name="shouldSkipGradingIfConfigurationIsEmpty" classname="io.jenkins.plugins.grading.AutoGraderITest" time="0.527"/>
   <testcase name="shouldAbortBuildSinceNoTestActionHasBeenRegistered" classname="io.jenkins.plugins.grading.AutoGraderITest" time="0.563"/>
-</testsuite>''', fileName: 'failsafe-autograderiTest.xml')])
+</testsuite>''', fileName: 'pipeline_self/failsafe-autograderiTest.xml')])
 
             }
         }
