@@ -6,9 +6,9 @@ pipeline {
             steps {
                 publishCoverage adapters: [jacocoAdapter('pipeline_self/jacoco.xml')], sourceFileResolver: sourceFiles('NEVER_STORE')
                 step([$class: 'PitPublisher', mutationStatsFile: 'pipeline_self/mutations.xml'])
-                junit testResults: '**/target/*-reports/TEST-*.xml'
+                junit testResults: 'pipeline_self/TEST-*.xml'
 
-                recordIssues tools: [checkStyle(pattern: 'target/checkstyle-result.xml')] , qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
+                recordIssues tools: [checkStyle(pattern: 'pipeline_self/checkstyle.xml')] , qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
 
             }
         }
