@@ -177,6 +177,26 @@ public class AutoGrader extends Recorder implements SimpleBuildStep {
                 score.getFailedSize(), score.getSkippedSize());
         logHandler.log("Total score for test results: " + total);
     }
+    
+  
+    private void duplicate(@NonNull final Run<?, ?> run,
+            final Score actualScore, final JSONObject testConfiguration, final LogHandler logHandler) {
+        TestResultAction action = run.getAction(TestResultAction.class);
+        if (action == null) {
+            throw new IllegalArgumentException(
+                    "Test scoring has been enabled, but no test results have been found.");
+        }
+
+        logHandler.log("Grading test results " + action.getDisplayName());
+        TestConfiguration testsConfiguration = TestConfiguration.from(testConfiguration);
+        TestScore score = new TestScore(testsConfiguration, action);
+        int total = actualScore.addTestsTotal(testsConfiguration, score);
+
+        logHandler.log("-> Score %d - from recorded test results: %d, %d, %d, %d",
+                score.getTotalImpact(), score.getTotalSize(), score.getPassedSize(),
+                score.getFailedSize(), score.getSkippedSize());
+        logHandler.log("Total score for test results: " + total);
+    }
 
     @VisibleForTesting
     void gradeAnalysisResults(final Run<?, ?> run,
